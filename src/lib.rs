@@ -50,7 +50,7 @@ macro_rules! submodule {
             let full_name = format!("{}.{}", current.name()?, part);
 
             current = if let Ok(existing) = current.getattr(part) {
-                existing.downcast_into::<PyModule>()?
+                existing.cast_into::<PyModule>()?
             } else {
                 let new_mod = PyModule::new(py, part)?;
 
