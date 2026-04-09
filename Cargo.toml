@@ -1,0 +1,16 @@
+[package]
+name = "pyo3-nest"
+version = "0.1.0"
+edition = "2024"
+description = "A clean and ergonomic macro for creating deeply nested submodules in PyO3"
+license = "MIT"
+repository = "https://github.com/ppmpreetham/pyo3-nest"
+documentation = "https://docs.rs/pyo3-nest"
+keywords = ["pyo3", "python", "macro", "submodule", "nest"]
+categories = ["api-bindings", "development-tools::ffi"]
+
+[dependencies]
+pyo3 = { version = ">=0.22, <0.29", features = ["extension-module"] }
+
+[lib]
+proc-macro = false
