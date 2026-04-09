@@ -44,15 +44,15 @@ macro_rules! submodule {
             .collect();
 
         let mut current: Bound<'_, PyModule> = $parent.clone();
-        let sys_modules = py.import_bound("sys")?.getattr("modules")?;
+        let sys_modules = py.import("sys")?.getattr("modules")?;
 
         for &part in &parts {
             let full_name = format!("{}.{}", current.name()?, part);
 
             current = if let Ok(existing) = current.getattr(part) {
-                existing.cast_into::<PyModule>()?
+                existing.downcast_into::<PyModule>()?
             } else {
-                let new_mod = PyModule::new_bound(py, part)?;
+                let new_mod = PyModule::new(py, part)?;
 
                 let _ = new_mod.add("__doc__", format!("Auto-generated submodule: {}", full_name));
 
