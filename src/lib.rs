@@ -47,12 +47,16 @@ macro_rules! submodule {
         let sys_modules = py.import("sys")?.getattr("modules")?;
 
         for &part in &parts {
+            let parent_name = current.name()?.to_string();
             let full_name = format!("{}.{}", current.name()?, part);
 
             current = if let Ok(existing) = current.getattr(part) {
                 existing.cast_into::<PyModule>()?
             } else {
                 let new_mod = PyModule::new(py, part)?;
+
+                new_mod.setattr("__name__", &full_name)?;
+                new_mod.setattr("__package__", &parent_name)?;
 
                 current.add_submodule(&new_mod)?;
                 sys_modules.set_item(&full_name, &new_mod)?;
