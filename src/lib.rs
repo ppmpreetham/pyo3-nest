@@ -54,8 +54,6 @@ macro_rules! submodule {
             } else {
                 let new_mod = PyModule::new(py, part)?;
 
-                let _ = new_mod.add("__doc__", format!("Auto-generated submodule: {}", full_name));
-
                 current.add_submodule(&new_mod)?;
                 sys_modules.set_item(&full_name, &new_mod)?;
 
