@@ -1,6 +1,6 @@
 [package]
 name = "pyo3-nest"
-version = "0.1.3"
+version = "0.1.4"
 edition = "2024"
 description = "A clean and ergonomic macro for creating deeply nested submodules in PyO3"
 license = "MIT"
